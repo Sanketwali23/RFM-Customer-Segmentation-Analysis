@@ -64,5 +64,3 @@ RFM ranks every customer on three axes — **Recency** (how recently they bought
 ```
 
 ---
-
-<sub>Dataset: UCI Online Retail II · Reference date: 2011-12-10 · Scored via NTILE(5) quintiles</sub>
