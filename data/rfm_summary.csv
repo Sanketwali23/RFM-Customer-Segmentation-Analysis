@@ -1,0 +1,8 @@
+Segment,Customer_Count,Avg_Recency_Days,Avg_Orders,Avg_Revenue_Per_Customer,Total_Revenue,Pct_Customers,Pct_Revenue
+Champions,1298,25.3,17.9,9870.05,12811329.43,22.1,72.2
+Loyal Customers,1359,95.6,5.6,2306.66,3134756.85,23.1,17.7
+At Risk,618,387.2,3.5,975.25,602704.47,10.5,3.4
+Need Attention,937,327.4,1.4,597.46,559815.85,15.9,3.2
+Potential Loyalists,798,68.1,2.2,582.82,465089.56,13.6,2.6
+Lost,802,517.7,1.1,198.27,159015.67,13.6,0.9
+New Customers,66,37.1,1.0,162.38,10717.33,1.1,0.1
