@@ -1,66 +1,269 @@
-# 🛒 RFM Customer Segmentation — Online Retail II
+# 🛒 RFM Customer Segmentation Analysis — Online Retail II
 
-![SQL](https://img.shields.io/badge/SQL-Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
-![Excel](https://img.shields.io/badge/Excel-Dashboard-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)
-![Dataset](https://img.shields.io/badge/UCI-Online%20Retail%20II-orange?style=for-the-badge)
-
-> **1,067,371 transactions. 5,878 customers scored. One brutal truth: 22% of customers drive 72.2% of revenue.**
+![SQL Server](https://img.shields.io/badge/SQL-Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
+![Microsoft Excel](https://img.shields.io/badge/Microsoft-Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)
+![Dataset](https://img.shields.io/badge/Dataset-UCI%20Online%20Retail%20II-orange?style=for-the-badge)
 
 ---
 
-## 📐 What is RFM?
+## 📌 Project Overview
 
-RFM ranks every customer on three axes — **Recency** (how recently they bought), **Frequency** (how often), and **Monetary** (how much). Each gets a 1–5 score via `NTILE(5)`, combined into a segment label. Simple model. Serious business impact.
+Customer segmentation is an essential strategy for understanding customer behavior, identifying high-value customers, and improving business profitability.
+
+This project performs **RFM (Recency, Frequency, Monetary) Analysis** on the Online Retail II dataset to segment customers based on their purchasing behavior.
+
+Using Microsoft SQL Server and Excel, the project transforms over one million transaction records into meaningful customer segments and business insights.
+
+The analysis identifies seven customer segments and highlights an important business finding: **approximately 22% of customers contribute 72.2% of total revenue.**
+
+The ultimate goal is to help businesses develop targeted marketing strategies, improve customer retention, and maximize customer lifetime value.
 
 ---
 
-## 🔢 Key Numbers
+## 🎯 Project Objectives
 
-| Metric | Value |
+1. Analyze customer purchasing behavior using RFM analysis.
+2. Identify high-value and loyal customers.
+3. Segment customers based on Recency, Frequency, and Monetary scores.
+4. Identify customers who are at risk of becoming inactive.
+5. Analyze revenue contribution across different customer segments.
+6. Develop actionable marketing and customer retention strategies.
+7. Build an Excel dashboard to visualize customer segmentation and business performance.
+
+---
+
+## 📂 Dataset
+
+The project uses the **Online Retail II dataset** from the UCI Machine Learning Repository.
+
+The dataset contains transactional records from a UK-based online retail business covering December 2009 to December 2011.
+
+### Dataset Characteristics
+
+| Feature | Description |
 |---|---|
-| 🗄️ Raw rows ingested | 1,067,371 |
-| ✅ Rows after cleaning | 805,549 *(75.5% retained)* |
-| 👥 Unique customers scored | 5,878 |
-| 💷 Total revenue analysed | £17,743,429 |
-| 🏆 Champions (22% of customers) | **72.2% of revenue** |
-| ⚠️ At-Risk revenue at stake | **£602,704** |
-| ❌ Lost customers | 802 customers · avg **517 days** inactive |
+| Raw Transactions | 1,067,371 |
+| Cleaned Transactions | 805,549 |
+| Unique Customers | 5,878 |
+| Time Period | Dec 2009 – Dec 2011 |
+| Country | United Kingdom |
+| Revenue Column | Quantity × Price |
+
+### Key Attributes
+
+1. Invoice Number
+2. Stock Code
+3. Product Description
+4. Quantity
+5. Invoice Date
+6. Unit Price
+7. Customer ID
+8. Country
 
 ---
 
-## 🗂️ Segments at a Glance
+## 🛠 Tools & Technologies
 
-| Segment | Customers | Strategy |
-|---|---|---|
-| 🏆 Champions | 1,293 | Reward & protect — they're your business |
-| 💛 Loyal Customers | 847 | Upsell & keep warm |
-| 🌱 Potential Loyalists | 712 | Nudge to commit with a loyalty incentive |
-| 🆕 New Customers | 406 | Onboard well — first 90 days are critical |
-| ⚠️ At Risk | 618 | Win-back campaign **now** — £602K on the line |
-| 😴 Need Attention | 1,200 | Re-engage before they slip to Lost |
-| ❌ Lost | 802 | One last automated campaign, then suppress |
-
----
-
-## 🏗️ Stack & Files
-
-| File | Description |
+| Tool | Purpose |
 |---|---|
-| `rfm_analysis_sqlserver.sql` | 10-step SQL pipeline — cleaning → scoring → segmentation |
-| `RFM_Dashboard.xlsx` | 4-sheet Excel workbook with KPI cards, charts & cleaning log |
-| `rfm_summary.csv` | Segment-level aggregates |
-| `rfm_customers.csv` | All 5,878 customers with R/F/M scores and labels |
+| Microsoft SQL Server | Data cleaning, transformation, and RFM analysis |
+| SQL | CTEs, window functions, aggregations, and customer segmentation |
+| Microsoft Excel | Dashboard development and data visualization |
+| UCI Online Retail II | Source dataset |
 
 ---
 
-## 🚀 Reproduce It
+## 🔎 Project Workflow
 
-```bash
-# 1. Download Online Retail II from Kaggle
-# 2. Import into SQL Server as table: retail
-# 3. Run rfm_analysis_sqlserver.sql (Steps 1–10)
-# 4. Export results → rfm_summary.csv & rfm_customers.csv
-# 5. Open RFM_Dashboard.xlsx
+### 1️⃣ Data Cleaning & Preprocessing (SQL Server)
+
+The raw dataset was cleaned to ensure accurate customer-level analysis.
+
+Key cleaning operations:
+
+a. Removed cancelled invoices (invoice numbers starting with C).
+
+b. Removed records with NULL Customer IDs.
+
+c. Removed transactions with zero or negative prices.
+
+d. Created a Revenue column using Quantity × Price.
+
+e. Converted InvoiceDate into the appropriate date format.
+
+f. Prepared the final cleaned dataset for customer-level aggregation.
+
+**Data Cleaning Results:**
+
+| Cleaning Metric | Result |
+|---|---:|
+| Original Records | 1,067,371 |
+| Final Clean Records | 805,549 |
+| Records Retained | 75.5% |
+| Unique Customers | 5,878 |
+
+### 2️⃣ RFM Analysis (SQL Server)
+
+RFM analysis was performed using three key customer metrics:
+
+**Recency (R):**
+Measures the number of days since a customer's last purchase. Customers who purchased more recently receive better recency scores.
+
+**Frequency (F):**
+Measures the total number of purchases made by each customer.
+
+**Monetary (M):**
+Measures the total revenue generated by each customer.
+
+Each metric was scored on a scale of 1–5 using SQL window functions such as `NTILE(5)`.
+
+The individual scores were combined to create RFM scores and assign customers to seven business segments.
+
+### 3️⃣ Customer Segmentation
+
+Customers were classified into seven segments based on their RFM scores and purchasing behavior.
+
+| Segment | Business Strategy |
+|---|---|
+| 🏆 Champions | Reward and retain the most valuable customers |
+| 💛 Loyal Customers | Encourage repeat purchases and upselling |
+| 🌱 Potential Loyalists | Convert promising customers into loyal buyers |
+| 🆕 New Customers | Improve onboarding and encourage second purchases |
+| ⚠️ At Risk | Launch targeted win-back campaigns |
+| 😴 Need Attention | Re-engage customers before they become inactive |
+| ❌ Lost | Run final reactivation campaigns |
+
+### 4️⃣ Excel Dashboard Development
+
+An Excel dashboard was developed to present the results of the RFM analysis in an interactive and business-friendly format.
+
+**Dashboard Highlights:**
+
+- Total customers analyzed
+- Total revenue generated
+- Champions' revenue contribution
+- Customer segment distribution
+- Revenue contribution by segment
+- Segment performance summary
+- Key business insights and recommendations
+- Data cleaning log
+
+---
+
+## 📊 Dashboard & Visualizations
+
+### 1. RFM Customer Segmentation Dashboard
+
+The main dashboard provides an overview of customer performance, revenue contribution, and strategic recommendations.
+
+![RFM Customer Segmentation Dashboard](images/rfm-dashboard.png)
+
+### 2. RFM Segment Summary
+
+This analysis presents customer distribution, average recency, average orders, average revenue per customer, and total revenue across all seven segments.
+
+![RFM Segment Summary](images/rfm-segment-analysis.png)
+
+### 3. Data Cleaning Log
+
+The data cleaning log documents the preprocessing steps, removed records, running row counts, and final dataset statistics.
+
+![Data Cleaning Log](images/data-cleaning-log.png)
+
+---
+
+## 📊 Key Insights
+
+1. **Champions Generate the Highest Revenue:** Approximately 22% of customers contribute 72.2% of total revenue.
+
+2. **At-Risk Customers:** 618 customers represent approximately £602,704 in revenue, highlighting a significant customer retention opportunity.
+
+3. **Lost Customers:** 802 customers have been inactive for an average of more than 517 days.
+
+4. **Customer Retention Opportunity:** Loyal Customers and Champions represent an important customer base that should be protected through personalized engagement.
+
+5. **New Customer Engagement:** New customers require effective onboarding and repeat-purchase strategies to increase long-term customer value.
+
+---
+
+## 💡 Business Recommendations
+
+Based on the RFM analysis, the following business strategies are recommended:
+
+1. **Champions:** Introduce VIP loyalty programmes, exclusive rewards, and personalized offers to retain high-value customers.
+
+2. **Loyal Customers:** Implement referral programmes, loyalty rewards, and cross-selling campaigns.
+
+3. **Potential Loyalists:** Encourage repeat purchases through personalized discounts and loyalty incentives.
+
+4. **New Customers:** Launch automated onboarding campaigns and provide incentives for a second purchase.
+
+5. **At-Risk Customers:** Execute targeted win-back campaigns with personalized discounts to recover approximately £602K in revenue at risk.
+
+6. **Need Attention:** Use email campaigns and personalized offers to reactivate inactive customers.
+
+7. **Lost Customers:** Run a final reactivation campaign and reduce marketing expenditure on customers who remain unresponsive.
+
+---
+
+## 📁 Project Structure
+
+```text
+RFM-Customer-Segmentation-Analysis/
+│
+├── data/
+│   └── Online Retail II Dataset
+│
+├── images/
+│   ├── rfm-dashboard.png
+│   ├── rfm-segment-analysis.png
+│   └── data-cleaning-log.png
+│
+├── rfm_analysis_sqlserver.sql
+│
+├── RFM_Dashboard.xlsx
+│
+├── rfm_summary.csv
+│
+├── rfm_customers.csv
+│
+└── README.md
 ```
 
 ---
+
+## 🚀 How to Reproduce the Project
+
+1. Download the Online Retail II dataset.
+2. Import the dataset into Microsoft SQL Server.
+3. Execute the SQL data-cleaning operations.
+4. Calculate customer-level Recency, Frequency, and Monetary metrics.
+5. Apply RFM scoring using `NTILE(5)`.
+6. Assign customers to the seven RFM segments.
+7. Export the customer-level and segment-level analysis results.
+8. Open the Excel dashboard to explore the visualizations and business insights.
+
+---
+
+## 🎓 Skills Demonstrated
+
+1. Data Cleaning and Preprocessing
+2. SQL Server and Advanced SQL Queries
+3. Common Table Expressions (CTEs)
+4. SQL Window Functions
+5. RFM Customer Segmentation
+6. Data Aggregation and Analysis
+7. Microsoft Excel Dashboard Development
+8. Data Visualization
+9. Business Intelligence
+10. Business Insight Generation
+
+---
+
+## 📌 Conclusion
+
+This project demonstrates how transactional data can be transformed into meaningful business intelligence through SQL-based RFM analysis and Excel visualization.
+
+By identifying high-value customers, loyal buyers, at-risk customers, and inactive customers, businesses can develop targeted marketing strategies and improve customer retention.
+
+**The key takeaway:** Understanding customer purchasing behavior is essential for maximizing revenue, strengthening customer relationships, and driving long-term business growth.
