@@ -156,19 +156,19 @@ An Excel dashboard was developed to present the results of the RFM analysis in a
 
 The main dashboard provides an overview of customer performance, revenue contribution, and strategic recommendations.
 
-![RFM Customer Segmentation Dashboard](images/rfm-dashboard.png)
+![RFM Customer Segmentation Dashboard](images/dashboard.png)
 
 ### 2. RFM Segment Summary
 
 This analysis presents customer distribution, average recency, average orders, average revenue per customer, and total revenue across all seven segments.
 
-![RFM Segment Summary](images/rfm-segment-analysis.png)
+![RFM Segment Summary](images/summary.png)
 
 ### 3. Data Cleaning Log
 
 The data cleaning log documents the preprocessing steps, removed records, running row counts, and final dataset statistics.
 
-![Data Cleaning Log](images/data-cleaning-log.png)
+![Data Cleaning Log](images/data_cleaning_log.png)
 
 ---
 
